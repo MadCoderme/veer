@@ -22,16 +22,46 @@ Veer controls how your bundle is served, how your pages are rendered and how you
 - Primarily, the HTML file contains nothing more than some basic pre rendered elements. The main bundle is loaded and mounted once the initial page is fully loaded. This ensures the fastest possible loading time regardless of how large your application is.
 - Subsequent routes are mounted accordingly when navigated
 
-  ## Installing veer
-  As simple as running your favorite command:
+## Installing veer
+As simple as running your favorite command:
   ```
   npm i -g veer
   ```
-  ## Usage
-  Currently there is just one command that generates your production bundle.
+## Usage
+Currently there is just one command that generates your production bundle.
   ```
   veer bundle
   ```
-  ## Project structure
-  What basically matters is the structure of your project. However, veer can be quite easily used with your existing project structure.
-  
+## Project structure
+What basically matters is the structure of your project. However, veer can be quite easily used with your existing project structure.
+
+There are two extra files required.
+
+#### `routes.config.json`
+Includes all your routes. Veer itself is an independent routing system.
+
+**Example**
+```json
+[
+    {
+        "path": "/",
+        "component": "views/Home.vue",
+        "meta": [
+            { "name": "title", "content": "Home page!" }
+        ]
+    },
+    {
+        "path": "/search",
+        "component": "views/Search.vue",
+        "meta": [
+            { "name": "title", "content": "Search things" }
+        ]
+    }
+]
+```
+
+**Available props**
+| Name  | Value description | Note |
+| ------------- | ------------- | ------------- |
+| `path`  | Route path  | Currently, params are not supported  |
+| `component`  | Component location  | Veer looks up for `src` directory. Then, only files under `views` directory are processed  |

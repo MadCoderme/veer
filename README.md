@@ -36,11 +36,22 @@ Currently there is just one command that generates your production bundle.
 What basically matters is the structure of your project. However, veer can be quite easily used with your existing project structure.
 
 ### Directory structure
-In project route, you need the `src` directory. Under `src` directory, there must be a `views` directory which will contain all your page components.
+At project route, you need the `src` directory. Under `src` directory, there must be a `views` directory which will contain all your page components.
 In fact, this is the structure that is created when you created a new Vite project.
 
-So, an ideal project structure will look like this.
-
+So, a minimal project structure will look like this.
+```
+/
+├── node_modules
+├── src
+│   └── views
+│       ├── Component1.vue
+│       └── Component2.vue
+├── spa.config.json
+├── routes.config.json
+├── prerenderer.js
+└── package.json
+```
 
 ### Additional Files
 There are three extra files required.
@@ -104,3 +115,18 @@ window.prerender = () => {
 You must define a function named `window.prerender()` here which will be called right before loading individual bundle.
 
 You can put any kind of logic inside this function that will render a pre loader or do some essential tasks while the full page is being loaded. However, it's recommended to keep it small and synchronous. In later versions, a size restriction will be applied.
+
+## Deployment 
+Once successfully processed, veer will generate a `public` folder at root location. This is the default structure:
+```
+/public
+├── bundles
+│   └── views
+│       ├── Component1.js
+│       └── Component2.js
+├── index.html
+├── path1.html
+├── routes.config.js
+├── setup.js
+└── vue.esm-browser.js
+```

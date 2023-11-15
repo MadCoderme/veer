@@ -35,9 +35,32 @@ Currently there is just one command that generates your production bundle.
 ## Project structure
 What basically matters is the structure of your project. However, veer can be quite easily used with your existing project structure.
 
-There are two extra files required.
+### Directory structure
+In project route, you need the `src` directory. Under `src` directory, there must be a `views` directory which will contain all your page components.
+In fact, this is the structure that is created when you created a new Vite project.
 
-#### `routes.config.json`
+So, an ideal project structure will look like this.
+
+
+### Additional Files
+There are three extra files required.
+
+#### `spa.config.json`
+This is the main configuration file that directs to other necessary ones. Veer needs two files to work.
+1. `routes`: This file lists all the accessible routes
+2. `prerenderer`: This file declares a common function that is called before every bundle/page is loaded
+
+
+```json
+{
+    "routes": "routes.config.json",
+    "prerenderer": "prerenderer.js"
+}
+```
+
+You can name those files anything you want, however, the default names are used here to describe their usage.
+
+#### routes.config.json
 Includes all your routes. Veer itself is an independent routing system.
 
 **Example**
@@ -61,7 +84,23 @@ Includes all your routes. Veer itself is an independent routing system.
 ```
 
 **Available props**
-| Name  | Value description | Note |
+| Name  | Type | Note |
 | ------------- | ------------- | ------------- |
-| `path`  | Route path  | Currently, params are not supported  |
-| `component`  | Component location  | Veer looks up for `src` directory. Then, only files under `views` directory are processed  |
+| `path`  | string  | Route path. Currently, params are not supported  |
+| `component`  | string  | Location of component. Veer looks up for `src` directory. Then, only files under `src/views` directory are processed  |
+| `meta`  | array  | Array of meta information. Each object contains two properties: `name` and `value`. Currently, only `title` and `description` works. |
+
+#### prerenderer.js
+This is an interesting part of Veer functionality. 
+
+**Example**
+```javascript
+window.prerender = () => {
+  if (window.location.hash === "about") {
+    document.getElementsByTagName('main')[0].innerHTML = "Loading About..."
+  }
+}
+```
+You must define a function named `window.prerender()` here which will be called right before loading individual bundle.
+
+You can put any kind of logic inside this function that will render a pre loader or do some essential tasks while the full page is being loaded. However, it's recommended to keep it small and synchronous. In later versions, a size restriction will be applied.

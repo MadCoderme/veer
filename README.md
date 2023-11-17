@@ -139,7 +139,7 @@ To achieve this, you need to configure your server which varies depending on you
 
 #### Vercel
 Create a `vercel.json` config file at root and put the following in it:
-```
+```json
 {
   "cleanUrls": true
 }
@@ -150,6 +150,16 @@ Enable Pretty URL for your site.
 
 #### Github Pages
 No extra configuration needed
+
 #### Express.js
+Configure `extension` option in `express.static` method.
+```js
+app.use(express.static(path.join(__dirname, 'public'), { index:false, extensions: ['html'] }));
+```
 
 #### Apache
+Configure `.htaccess` file. Full process and explanation here: https://ubiq.co/tech-blog/how-to-remove-html-from-url-in-apache-wordpress/
+
+
+## Performance 
+Here is a performance comparison between a normal Vite build and a Veer build.

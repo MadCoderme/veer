@@ -130,3 +130,26 @@ Once successfully processed, veer will generate a `public` folder at root locati
 ├── setup.js
 └── vue.esm-browser.js
 ```
+This is now ready to be deployed like any other vue project. However, a few things need further attentions.
+
+### Removing file extensions
+It's required to serve the path files without their `.html` extension. Otherwise, routing will break.
+
+To achieve this, you need to configure your server which varies depending on your server language and technology. Common examples are shown below.
+
+#### Vercel
+Create a `vercel.json` config file at root and put the following in it:
+```
+{
+  "cleanUrls": true
+}
+```
+
+#### Netlify
+Enable Pretty URL for your site.
+
+#### Github Pages
+No extra configuration needed
+#### Express.js
+
+#### Apache

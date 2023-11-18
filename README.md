@@ -162,15 +162,24 @@ Configure `.htaccess` file. Full process and explanation here: https://ubiq.co/t
 
 ### Using vue Plugins
 
-As there is no `main.js` file, you need to install vue plugins inside the components, wherever needed.
+As there is no `main.js` file, you need to install vue plugins inside the components, wherever needed. To make this easier, use `window.app` which is defined automatically after initial scripts are loaded.
 
+```js
+// Example of installing pinia plugin
+
+import { createPinia } from 'pinia'
+
+window.app.use(createPinia())
+
+```
+And, you should be good to go.
 
 
 ## Typescript support
 
 Veer supports typescript by default. However, you may need to change your `tsconfig` to make it run smoothly. Here is a config that I used during tests.
 
-```
+```json
 {
   "compilerOptions": {
     "target": "esnext",
@@ -229,5 +238,6 @@ Here is a performance comparison between a normal Vite build and a Veer build.
 
 This was done on a lightweight minimal todo app at https://github.com/beary/vite-example. I simply copied the `src` directory, created the required three files, and ran `veer bundle`. This shows, how Veer can improve performance even in the bare-bone vue apps (around 40% faster in Mobile).
 
-**Tips**
-To get the minimum cumulative layout shift, optimize your pre-renders.
+**Tips:** To get the minimum cumulative layout shift, optimize your pre-renders.
+
+

@@ -160,6 +160,74 @@ app.use(express.static(path.join(__dirname, 'public'), { index:false, extensions
 #### Apache
 Configure `.htaccess` file. Full process and explanation here: https://ubiq.co/tech-blog/how-to-remove-html-from-url-in-apache-wordpress/
 
+### Using vue Plugins
+
+As there is no `main.js` file, you need to install vue plugins inside the components, wherever needed.
+
+
+
+## Typescript support
+
+Veer supports typescript by default. However, you may need to change your `tsconfig` to make it run smoothly. Here is a config that I used during tests.
+
+```
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "ESNext",
+    "strict": false,
+    "jsx": "preserve",
+    "allowJs": true,
+    "importHelpers": true,
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noResolve": false,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "types": [
+      "node",
+      "vue"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+, "index.d.ts"  ],
+  "exclude": [
+  ]
+}
+```
 
 ## Performance 
-Here is a performance comparison between a normal Vite build and a Veer build.
+Here is a performance comparison between a normal Vite build and a Veer build. 
+
+| Vite  | Veer |
+| ------------- | ------------- |
+| ![Mobile](https://github.com/MadCoderme/veer/assets/63955762/3ffc9a30-87ff-483b-92c3-ebb18f208dfe) Mobile | ![Mobile](https://github.com/MadCoderme/veer/assets/63955762/4aa55e02-c2c1-4388-9fd3-2758aba2796d) Mobile |
+| ![Desktop](https://github.com/MadCoderme/veer/assets/63955762/c244fe6e-3b82-4135-887b-b1eef1be1051) Desktop | ![Desktop](https://github.com/MadCoderme/veer/assets/63955762/cf0ffbec-a689-402c-8d27-929efb0c8da8) Desktop |
+
+
+This was done on a lightweight minimal todo app at https://github.com/beary/vite-example. I simply copied the `src` directory, created the required three files, and ran `veer bundle`. This shows, how Veer can improve performance even in the bare-bone vue apps (around 40% faster in Mobile).
+
+**Tips**
+To get the minimum cumulative layout shift, optimize your pre-renders.

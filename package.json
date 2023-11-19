@@ -1,6 +1,6 @@
 {
-  "name": "vuespa",
-  "module": "bin/bundler.js",
+  "name": "veer",
+  "module": "bin/index.js",
   "dependencies": {
     "@lopatnov/rollup-plugin-uglify": "^2.1.5",
     "@rollup/plugin-alias": "^5.0.1",
@@ -35,7 +35,7 @@
     "bun-types": "latest"
   },
   "bin": {
-    "vuespa": "./bin/index.js"
+    "veer": "./bin/index.js"
   },
   "type": "module"
 }

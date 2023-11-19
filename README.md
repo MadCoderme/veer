@@ -24,12 +24,12 @@ Veer controls how your bundle is served, how your pages are rendered and how you
 
 ## Installing veer
 As simple as running your favorite command:
-  ```
+  ```console
   npm i -g veer
   ```
 ## Usage
 Currently there is just one command that generates your production bundle.
-  ```
+  ```console
   veer bundle
   ```
 ## Project structure
@@ -40,7 +40,7 @@ At project route, you need the `src` directory. Under `src` directory, there mus
 In fact, this is the structure that is created when you created a new Vite project.
 
 So, a minimal project structure will look like this.
-```
+```ascii
 /
 ├── node_modules
 ├── src
@@ -118,7 +118,7 @@ You can put any kind of logic inside this function that will render a pre loader
 
 ## Deployment 
 Once successfully processed, veer will generate a `public` folder at root location. This is the default structure:
-```
+```ascii
 /public
 ├── bundles
 │   └── views
@@ -241,4 +241,23 @@ This was done on a lightweight minimal todo app at https://github.com/beary/vite
 
 **Tips:** To get the minimum cumulative layout shift, optimize your pre-renders.
 
+### Performance Features
+Veer itself is lightweight and aims to produce smallest possible code bundles.
 
+1. **Bundling:** Veer uses the same `Rollup` to bundle JS files used in Vite. Support for the following core features are available -
+ - Javascript files (`.js`, `.jsx`, `.vue`)
+ - Typescript
+ - CSS, PostCSS
+ - JSON
+ - Image assets (jpg, png, svg, gif)
+2. **Tree shaking:** Rollup automatically does tree shaking. Veer makes sure only the code you need is being shipped.
+3. **Minification:** Veer uses `uglify` to minify the JS bundles.
+
+## Using in Production
+Veer is not mature enough to be used in Production. Collaborate to make the development process faster. Any kind of suggestion will be appreciated.
+
+## Todo
+- [ ] Let developers create their own HTML path files/templates
+- [ ] Ship core javascript along with the HTML files to reduce network requests
+- [ ] Upgrade Bundler abilities
+- [ ] Add CLI command to create Initial project template

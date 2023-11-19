@@ -230,11 +230,12 @@ Veer supports typescript by default. However, you may need to change your `tscon
 ## Performance 
 Here is a performance comparison between a normal Vite build and a Veer build. 
 
-| Vite  | Veer |
-| ------------- | ------------- |
-| ![Mobile](https://github.com/MadCoderme/veer/assets/63955762/3ffc9a30-87ff-483b-92c3-ebb18f208dfe) Mobile | ![Mobile](https://github.com/MadCoderme/veer/assets/63955762/4aa55e02-c2c1-4388-9fd3-2758aba2796d) Mobile |
-| ![Desktop](https://github.com/MadCoderme/veer/assets/63955762/c244fe6e-3b82-4135-887b-b1eef1be1051) Desktop | ![Desktop](https://github.com/MadCoderme/veer/assets/63955762/cf0ffbec-a689-402c-8d27-929efb0c8da8) Desktop |
+**🐢 Vite**
+<img src="https://github.com/MadCoderme/veer/assets/63955762/3ffc9a30-87ff-483b-92c3-ebb18f208dfe" alt="Mobile" /> 
 
+**⚡ Veer**
+
+<img src="https://github.com/MadCoderme/veer/assets/63955762/4aa55e02-c2c1-4388-9fd3-2758aba2796d" alt="Mobile" /> 
 
 This was done on a lightweight minimal todo app at https://github.com/beary/vite-example. I simply copied the `src` directory, created the required three files, and ran `veer bundle`. This shows, how Veer can improve performance even in the bare-bone vue apps (around 40% faster in Mobile).
 

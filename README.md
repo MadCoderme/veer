@@ -1,6 +1,31 @@
 # veer
 An upgraded SPA rendering method that focuses on performance and SEO.
 
+- [veer](#veer)
+  * [Why veer?](#why-veer-)
+  * [How does it work?](#how-does-it-work-)
+  * [Installing veer](#installing-veer)
+  * [Usage](#usage)
+  * [Project structure](#project-structure)
+    + [Directory structure](#directory-structure)
+    + [Additional Files](#additional-files)
+      - [`spa.config.json`](#-spaconfigjson-)
+      - [routes.config.json](#routesconfigjson)
+      - [prerenderer.js](#prerendererjs)
+  * [Deployment](#deployment)
+    + [Removing file extensions](#removing-file-extensions)
+      - [Vercel](#vercel)
+      - [Netlify](#netlify)
+      - [Github Pages](#github-pages)
+      - [Express.js](#expressjs)
+      - [Apache](#apache)
+    + [Using vue Plugins](#using-vue-plugins)
+  * [Typescript support](#typescript-support)
+  * [Performance](#performance)
+    + [Performance Features](#performance-features)
+  * [Using in Production](#using-in-production)
+  * [Todo](#todo)
+
 ## Why veer?
 SPA is a popular choice when it comes to building javascript based web applications. Low cost and ease in development attract many developers to roll up SPA. While vue.js is fast at its core, common problems still exist.
 

@@ -50,7 +50,7 @@ Veer controls how your bundle is served, how your pages are rendered and how you
 ## Installing veer
 As simple as running your favorite command:
   ```console
-  npm i -g veer
+  npm i -g @madcoderme/veer
   ```
 ## Usage
 Currently there is just one command that generates your production bundle.

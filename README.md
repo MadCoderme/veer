@@ -176,6 +176,9 @@ Enable Pretty URL for your site.
 #### Github Pages
 No extra configuration needed
 
+#### Cloudflare Pages
+No extra configuration needed. Simply put `public` as your build directory.
+
 #### Express.js
 Configure `extension` option in `express.static` method.
 ```js

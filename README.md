@@ -17,6 +17,7 @@ An upgraded SPA rendering method that focuses on performance and SEO.
       - [Vercel](#vercel)
       - [Netlify](#netlify)
       - [Github Pages](#github-pages)
+      - [Cloudflare Pages](#cloudflare-pages)
       - [Express.js](#expressjs)
       - [Apache](#apache)
     + [Using vue Plugins](#using-vue-plugins)
@@ -50,7 +51,7 @@ Veer controls how your bundle is served, how your pages are rendered and how you
 ## Installing veer
 As simple as running your favorite command:
   ```console
-  npm i -g veer
+  npm i -g @madcoderme/veer
   ```
 ## Usage
 Currently there is just one command that generates your production bundle.
@@ -175,6 +176,9 @@ Enable Pretty URL for your site.
 
 #### Github Pages
 No extra configuration needed
+
+#### Cloudflare Pages
+No extra configuration needed. Simply put `public` as your build directory.
 
 #### Express.js
 Configure `extension` option in `express.static` method.

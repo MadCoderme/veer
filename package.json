@@ -1,7 +1,7 @@
 {
   "name": "@madcoderme/veer",
   "module": "bin/index.js",
-  "version": "0.0.1",
+  "version": "0.0.16",
   "repository": "https://github.com/MadCoderme/veer",
   "dependencies": {
     "@lopatnov/rollup-plugin-uglify": "^2.1.5",

@@ -56,10 +56,10 @@ yargs(hideBin(process.argv))
     .command('bundle', 'Bundle project as VueSPA', () => { }, async(argv) => {
         const blank = '\n'.repeat(process.stdout.rows)
         console.log(blank)
+        
         readline.cursorTo(process.stdout, 0, 0)
         readline.clearScreenDown(process.stdout)
         console.time('Time elapsed')
-
         console.log(chalk.blue('🔎 Looking for necessary files'))
         // check for config file
         if (!fs.existsSync(process.cwd() + '/spa.config.json')) {
@@ -152,7 +152,8 @@ yargs(hideBin(process.argv))
                                 '**/*.gif',
                                 '**/*.jpg',
                                 '**/*.jpeg'
-                        ]
+                        ],
+                        publicPath: 'bundles/views/'
                     }),
                     commonjs(),
                     uglify()
@@ -183,8 +184,8 @@ yargs(hideBin(process.argv))
 
         // setup vuespa files
         console.log(chalk.blue('⚙️ Adding VueSPA Magic'))
-        fs.copyFileSync('../setup.js', process.cwd() + '/public/setup.js')
-        fs.copyFileSync('../vue.esm-browser.js', process.cwd() + '/public/vue.esm-browser.js')
+        fs.copyFileSync(import.meta.url.replace('file://', '').replace('bin/index.js', '') + 'setup.js', process.cwd() + '/public/setup.js')
+        fs.copyFileSync(import.meta.url.replace('file://', '').replace('bin/index.js', '') + 'vue.esm-browser.js', process.cwd() + '/public/vue.esm-browser.js')
         fs.writeFileSync(process.cwd() + '/public/routes.config.js', 'export const routes = ' + JSON.stringify(routes))
         console.log(chalk.green('VueSPA Files Copied'))
         console.log('\n')

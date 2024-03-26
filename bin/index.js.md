@@ -1,75 +1,69 @@
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Overview](#overview)
 - [Usage](#usage)
-  - [Command](#command)
-  - [Arguments](#arguments)
-  - [Options](#options)
-- [Code Structure](#code-structure)
-  - [Dependencies](#dependencies)
-  - [Functions](#functions)
-- [Conclusion](#conclusion)
+- [Commands](#commands)
+  - [bundle](#bundle)
+- [Functions](#functions)
+  - [walk](#walk)
+  - [build](#build)
+  - [generateOutputs](#generateOutputs)
+  - [generateHTMLRoute](#generateHTMLRoute)
 
-## Introduction
+## Overview
 
-This documentation provides a detailed overview of the VueSPA bundler tool, including its usage, code structure, and functionality.
+This documentation describes the VueSPA bundler, a tool for creating Vue.js Single Page Applications (SPAs). It provides detailed information on the usage, commands, and functions available in the bundler.
 
 ## Usage
 
-### Command
-
-To bundle a VueSPA project, use the following command:
+To use the VueSPA bundler, install it globally using npm:
 
 ```
-npx vuespa bundle
+npm install -g vuespa-bundler
 ```
 
-### Arguments
+Once installed, you can run the bundler from the command line:
 
-None
+```
+vuespa-bundler <command> [options]
+```
 
-### Options
+## Commands
 
-None
+The following commands are available in the VueSPA bundler:
 
-## Code Structure
+### bundle
 
-### Dependencies
+The `bundle` command is used to bundle a Vue.js SPA. It takes the following options:
 
-The tool uses the following dependencies:
+- `--config`: The path to the SPA configuration file.
+- `--routes`: The path to the JSON file containing the SPA's routes.
+- `--prerenderer`: The path to the script that will prerender the SPA's pages.
 
-- yargs/yargs: Command-line argument parser
-- chalk: Terminal string styling
-- readline: Node.js readline interface
-- fs: Node.js file system module
-- path: Node.js path manipulation module
-- rollup: JavaScript bundler
-- vue: Rollup plugin for Vue.js
-- typescript: Rollup plugin for TypeScript
-- uglify: Rollup plugin for minification
-- auto: Rollup plugin for automatic dependency installation
-- resolve: Rollup plugin for resolving module paths
-- replace: Rollup plugin for replacing strings
-- url: Rollup plugin for bundling URLs
-- PostCSS: Rollup plugin for CSS processing
-- postcss-import: PostCSS plugin for importing CSS files
-- postcss-url: PostCSS plugin for resolving CSS URLs
-- simplevars: PostCSS plugin for simple variable expansion
-- nested: PostCSS plugin for nested CSS rules
-- alias: Rollup plugin for creating aliases
-- commonjs: Rollup plugin for CommonJS module support
-- autoprefixer: PostCSS plugin for vendor prefixing
-- json: Rollup plugin for JSON parsing
+## Functions
 
-### Functions
+The following functions are used internally by the VueSPA bundler:
 
-The tool includes the following functions:
+### walk
 
-- `walk`: Recursively traverses a directory and returns a list of files
-- `build`: Builds a Rollup bundle
-- `generateOutputs`: Generates output files for a Rollup bundle
-- `generateHTMLRoute`: Generates an HTML route file
+The `walk` function is used to recursively walk through a directory and return a list of files.
 
-## Conclusion
+### build
 
-This documentation provides a comprehensive understanding of the VueSPA bundler tool, enabling users to efficiently bundle Vue.js applications for production.
+The `build` function is used to build a Vue.js SPA. It takes the following parameters:
+
+- `inputOption`: An object containing the input options for the rollup bundler.
+- `outputOption`: An object containing the output options for the rollup bundler.
+
+### generateOutputs
+
+The `generateOutputs` function is used to generate the output files for a Vue.js SPA. It takes the following parameters:
+
+- `bundle`: The rollup bundle.
+- `outputOption`: An object containing the output options for the rollup bundler.
+
+### generateHTMLRoute
+
+The `generateHTMLRoute` function is used to generate the HTML for a Vue.js SPA route. It takes the following parameter:
+
+- `route`: The route object.

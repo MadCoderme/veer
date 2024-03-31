@@ -3,126 +3,107 @@
 - [Introduction](#introduction)
 - [Usage](#usage)
 - [Commands](#commands)
-- [Configuration](#configuration)
-- [File Structure](#file-structure)
-- [Dependencies](#dependencies)
-- [Development](#development)
-- [Contributing](#contributing)
-- [License](#license)
+  - [bundle](#bundle)
+- [Functions](#functions)
+  - [walk](#walk)
+  - [build](#build)
+  - [generateOutputs](#generateOutputs)
+  - [generateHTMLRoute](#generateHTMLRoute)
 
 ## Introduction
 
-This documentation provides a comprehensive guide to the VueSPA project. VueSPA is a command-line tool that helps you bundle and prerender a Vue.js application for production.
+This documentation provides a detailed overview of the VueSPA bundler, a command-line tool used to create Vue.js Single Page Applications (SPAs). It includes information on the tool's installation, usage, commands, and functions.
 
 ## Usage
 
-To use VueSPA, install it globally using npm:
+To use the VueSPA bundler, first install it globally using npm:
 
 ```
-npm install -g vuespa
+npm install -g vuespa-bundler
 ```
 
-Once installed, you can run the `vuespa` command to bundle and prerender your Vue.js application.
+Once installed, you can use the `vuespa` command to bundle your Vue.js projects.
 
 ## Commands
 
-The `vuespa` command has the following commands:
+### bundle
 
-- `bundle`: Bundles and prerenders your Vue.js application.
+The `bundle` command is used to bundle a Vue.js project into a production-ready format.
 
-## Configuration
-
-The `vuespa` command uses a configuration file named `spa.config.json` to configure the bundling and prerendering process. The following is an example of a `spa.config.json` file:
+**Usage:**
 
 ```
-{
-  "routes": "routes.json",
-  "prerenderer": "prerenderer.js"
-}
+vuespa bundle
 ```
 
-The `routes` property specifies the path to a JSON file that contains an array of route objects. Each route object has the following properties:
+**Options:**
 
-- `path`: The path of the route.
-- `component`: The path to the Vue.js component that will be rendered for the route.
-- `meta`: An array of meta objects that can be used to provide additional information about the route.
+- `--config`: Path to a custom configuration file (default: `spa.config.json`).
 
-The `prerenderer` property specifies the path to the JavaScript file that will be used to prerender the Vue.js application.
+## Functions
 
-## File Structure
+### walk
 
-The following is a recommended file structure for a VueSPA project:
+The `walk` function recursively walks through a directory and returns an array of all the files and directories it finds.
 
-```
-├── src
-│   ├── views
-│   │   ├── Home.vue
-│   │   ├── About.vue
-│   │   ├── ...
-│   ├── assets
-│   │   ├── styles
-│   │   │   ├── main.css
-│   │   │   ├── ...
-│   │   ├── scripts
-│   │   │   ├── main.js
-│   │   │   ├── ...
-│   ├── components
-│   │   ├── Header.vue
-│   │   ├── Footer.vue
-│   │   ├── ...
-├── public
-│   ├── index.html
-│   ├── About.html
-│   ├── ...
-│   ├── bundles
-│   │   ├── Home.js
-│   │   ├── About.js
-│   │   ├── ...
-│   ├── prerenderer.js
-├── spa.config.json
-├── package.json
-```
-
-## Dependencies
-
-The `vuespa` command depends on the following packages:
-
-- `yargs`: A command-line argument parser.
-- `rollup`: A JavaScript bundler.
-- `vue`: The Vue.js framework.
-- `rollup-plugin-vue`: A Rollup plugin for Vue.js.
-- `rollup-plugin-typescript2`: A Rollup plugin for TypeScript.
-- `rollup-plugin-uglify`: A Rollup plugin for UglifyJS.
-- `rollup-plugin-auto-install`: A Rollup plugin that automatically installs missing dependencies.
-- `rollup-plugin-node-resolve`: A Rollup plugin that resolves node modules.
-- `rollup-plugin-replace`: A Rollup plugin that replaces strings in the code.
-- `rollup-plugin-url`: A Rollup plugin that handles URLs in the code.
-- `rollup-plugin-postcss`: A Rollup plugin for PostCSS.
-- `postcss-import`: A PostCSS plugin that imports CSS files.
-- `postcss-url`: A PostCSS plugin that handles URLs in CSS files.
-- `postcss-simple-vars`: A PostCSS plugin that handles simple variables in CSS files.
-- `postcss-nested`: A PostCSS plugin that handles nested CSS rules.
-- `rollup-plugin-alias`: A Rollup plugin that aliases paths in the code.
-- `rollup-plugin-commonjs`: A Rollup plugin that handles CommonJS modules.
-- `autoprefixer`: A PostCSS plugin that adds vendor prefixes to CSS rules.
-- `rollup-plugin-json`: A Rollup plugin that handles JSON files.
-
-## Development
-
-To develop the `vuespa` command, clone the repository and run the following commands:
+**Usage:**
 
 ```
-npm install
-npm run dev
+walk(dir)
 ```
 
-This will start a development server that will watch for changes to the code and automatically rebuild the project.
+**Parameters:**
 
-## Contributing
+- `dir`: The directory to walk through.
 
-Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
+**Returns:**
 
-## License
+An array of all the files and directories in the specified directory.
 
-The `vuespa` command is licensed under the MIT License.
-  --- end of code ---
+### build
+
+The `build` function takes a Rollup input option and output option and builds a bundle.
+
+**Usage:**
+
+```
+build(inputOption, outputOption)
+```
+
+**Parameters:**
+
+- `inputOption`: The Rollup input option.
+- `outputOption`: The Rollup output option.
+
+### generateOutputs
+
+The `generateOutputs` function generates the output files for a Rollup bundle.
+
+**Usage:**
+
+```
+generateOutputs(bundle, outputOption)
+```
+
+**Parameters:**
+
+- `bundle`: The Rollup bundle.
+- `outputOption`: The Rollup output option.
+
+### generateHTMLRoute
+
+The `generateHTMLRoute` function generates the HTML for a VueSPA route.
+
+**Usage:**
+
+```
+generateHTMLRoute(route)
+```
+
+**Parameters:**
+
+- `route`: The VueSPA route.
+
+**Returns:**
+
+The HTML for the route.

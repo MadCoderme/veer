@@ -1,45 +1,68 @@
-## 🛠️ VueSPA CLI
+## VueSPA CLI
 
-### 📚 Table of Contents
-- 📝 Overview
-- 🚀 Getting Started
-- ⚙️ Usage
-- 💡 Example Usage
-- ℹ️ Additional Information
-- 🔗 Links
+This is a CLI tool for creating Vue.js SPAs.
+It bundles your Vue.js code, creates HTML routes, and adds the necessary VueSPA magic to make your app work.
 
-### 📝 Overview
-
-This CLI tool is designed to streamline the process of bundling and setting up a Vue single-page application (SPA). It automates tasks such as creating HTML routes, generating optimized JavaScript bundles, and integrating the necessary frameworks and utilities for VueSPA.
-
-### 🚀 Getting Started
-
-1. Install the CLI globally using npm: `npm install vuespa-cli -g`
-2. Create a new VueSPA project: `mkdir my-vue-spa && cd my-vue-spa`
-3. Initialize the project: `npx vuespa init`
-
-### ⚙️ Usage
-
-The CLI offers a single command:
-
-- `bundle`: Bundles the VueSPA project and sets up necessary files for deployment
-
-### 💡 Example Usage
-
-To bundle your VueSPA project, run:
+### Usage
 
 ```
-npx vuespa bundle
+npx vuespa-cli bundle
 ```
 
-### ℹ️ Additional Information
+### Features
 
-- The CLI relies on a `spa.config.json` file in the project root directory to configure project-specific settings, such as the routes to generate.
-- The bundled JavaScript code includes Vue.js, the Vue SPA setup script, and the necessary polyfills for browser compatibility.
-- The CLI uses Rollup for bundling and optimization, and PostCSS for CSS processing.
+- Bundles your Vue.js code using Rollup.js
+- Creates HTML routes for each Vue.js component
+- Adds the necessary VueSPA magic to make your app work
 
-### 🔗 Links
+### Requirements
+
+- Node.js >= 14
+- Vue.js >= 3
+
+### Installation
+
+```
+npm install -g vuespa-cli
+```
+
+### Command Reference
+
+#### `bundle`
+
+Bundles your Vue.js code, creates HTML routes, and adds the necessary VueSPA magic to make your app work.
+
+**Usage:**
+
+```
+vuespa-cli bundle
+```
+
+**Options:**
+
+| Option | Description |
+|---|---|
+| `-w, --watch` | Watch for changes to your Vue.js code and rebuild the bundle automatically. |
+| `-o, --output` | The output directory for the bundled code. |
+
+### Example Usage
+
+```
+npx vuespa-cli bundle -o public
+```
+
+This will bundle your Vue.js code and create an `index.html` file in the `public` directory.
+
+### Additional Information
+
+- The VueSPA CLI uses Rollup.js to bundle your Vue.js code.
+- The HTML routes are created using the `html-webpack-plugin`.
+- The VueSPA magic is added using the `vue-router` and `vuex` libraries.
+
+### Links
 
 - [Vue.js](https://vuejs.org/)
-- [Rollup](https://rollupjs.org/)
-- [PostCSS](https://postcss.org/)
+- [Rollup.js](https://rollupjs.org/)
+- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
+- [vue-router](https://router.vuejs.org/)
+- [vuex](https://vuex.vuejs.org/)

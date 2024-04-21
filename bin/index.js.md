@@ -1,68 +1,87 @@
 ## VueSPA CLI
 
-This is a CLI tool for creating Vue.js SPAs.
-It bundles your Vue.js code, creates HTML routes, and adds the necessary VueSPA magic to make your app work.
+### Table of Contents
 
-### Usage
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Creating a VueSPA Project](#creating-a-vuespa-project)
+  - [Bundling a VueSPA Project](#bundling-a-vuespa-project)
+  - [Serving a VueSPA Project](#serving-a-vuespa-project)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
 
-```
-npx vuespa-cli bundle
-```
+## Introduction
 
-### Features
+VueSPA CLI is a command-line interface tool for scaffolding, bundling, and serving Vue.js single-page applications (SPAs). It provides a convenient way to get started with VueSPA development and to manage the build process for production deployment.
 
-- Bundles your Vue.js code using Rollup.js
-- Creates HTML routes for each Vue.js component
-- Adds the necessary VueSPA magic to make your app work
+## Requirements
 
-### Requirements
+VueSPA CLI requires the following software to be installed on your system:
 
-- Node.js >= 14
-- Vue.js >= 3
+- Node.js (version 14 or higher)
+- npm (version 6 or higher)
 
-### Installation
+## Installation
+
+To install VueSPA CLI, run the following command:
 
 ```
 npm install -g vuespa-cli
 ```
 
-### Command Reference
+## Usage
 
-#### `bundle`
+### Creating a VueSPA Project
 
-Bundles your Vue.js code, creates HTML routes, and adds the necessary VueSPA magic to make your app work.
-
-**Usage:**
+To create a new VueSPA project, run the following command:
 
 ```
-vuespa-cli bundle
+vuespa create my-project
 ```
 
-**Options:**
+This will create a new directory called `my-project` containing the following files and directories:
 
-| Option | Description |
-|---|---|
-| `-w, --watch` | Watch for changes to your Vue.js code and rebuild the bundle automatically. |
-| `-o, --output` | The output directory for the bundled code. |
+- `package.json`: The project's package manifest.
+- `src`: The source code directory.
+- `public`: The production build output directory.
+- `spa.config.json`:  The project's configuration file.
+- `routes.config.json`:  The project's routes configuration file.
+- `prerenderer.js`:  The project's prerenderer script.
 
-### Example Usage
+### Bundling a VueSPA Project
+
+To bundle a VueSPA project, run the following command:
 
 ```
-npx vuespa-cli bundle -o public
+vuespa build
 ```
 
-This will bundle your Vue.js code and create an `index.html` file in the `public` directory.
+This will create a production build of the project in the `public` directory.
 
-### Additional Information
+### Serving a VueSPA Project
 
-- The VueSPA CLI uses Rollup.js to bundle your Vue.js code.
-- The HTML routes are created using the `html-webpack-plugin`.
-- The VueSPA magic is added using the `vue-router` and `vuex` libraries.
+To serve a VueSPA project, run the following command:
 
-### Links
+```
+vuespa serve
+```
 
-- [Vue.js](https://vuejs.org/)
-- [Rollup.js](https://rollupjs.org/)
-- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
-- [vue-router](https://router.vuejs.org/)
-- [vuex](https://vuex.vuejs.org/)
+This will start a development server on port 8080.
+
+## Configuration
+
+The VueSPA CLI can be configured using the `spa.config.json` file. This file contains the following configuration options:
+
+- `routes`: The path to the project's routes configuration file.
+- `prerenderer`: The path to the project's prerenderer script.
+
+## Contributing
+
+Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.
+
+## License
+
+VueSPA CLI is licensed under the MIT License.

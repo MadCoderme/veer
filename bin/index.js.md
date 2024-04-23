@@ -1,50 +1,67 @@
-# 📝 VueSPA CLI Documentation
+## VueSPA Builder Tool Documentation
 
-## 📖 Table of Contents
+### Table of Contents
 
 - [Introduction](#introduction)
-- [Commands](#commands)
-    - [bundle](#bundle)
+- [Installation](#installation)
 - [Usage](#usage)
-- [Troubleshooting](#troubleshooting)
+- [Commands](#commands)
+- [Options](#options)
+- [Contributing](#contributing)
 
-## 🌐 Introduction
+### Introduction
 
-VueSPA CLI is a command-line interface tool that helps you quickly and easily create Vue.js Single-Page Applications (SPAs). It provides a set of pre-configured build scripts and templates that streamline the development process.
+The VueSPA Builder Tool is a command-line utility that helps developers quickly and easily create and bundle Vue.js SPAs. It provides a streamlined process for setting up routes, creating bundles, and preparing the VueSPA files.
 
-## 🚀 Commands
+### Installation
 
-### bundle
-
-The `bundle` command is used to build your Vue.js SPA. It takes the following options:
-
-| Option | Description | Default |
-|---|---|---|
-| `--routes` | Path to the routes config file | `routes.json` |
-| `--prerenderer` | Path to the Prerenderer script | `prerenderer.js` |
-
-**Example usage:**
+To install the VueSPA Builder Tool, run the following command:
 
 ```
-vuespa bundle --routes=my-routes.json --prerenderer=my-prerenderer.js
+npm install -g vuespa-builder
 ```
 
-## 💡 Usage
+### Usage
 
-To use VueSPA CLI, you will need to have Node.js and npm installed on your system. Once you have installed VueSPA CLI globally using npm, you can use it by running the following command in your project directory:
+After installing the VueSPA Builder Tool, you can use the `vue-spa-builder` command to create and bundle your Vue.js SPAs.
+
+The general usage is as follows:
 
 ```
-npx vuespa <command>
+vue-spa-builder <command> [options]
 ```
 
-## 🚧 Troubleshooting
+### Commands
 
-If you encounter any issues while using VueSPA CLI, please check the following:
+The VueSPA Builder Tool supports the following commands:
 
-- Make sure you have Node.js and npm installed.
-- Make sure you are running VueSPA CLI in the correct project directory.
-- Check the VueSPA CLI documentation for more information.
+| Command | Description |
+|---|---|
+| `bundle` | Bundles the Vue.js SPA |
 
-## 🎉 Conclusion
+### Options
 
-VueSPA CLI is a powerful tool that can help you quickly and easily create Vue.js SPAs. By following the instructions in this documentation, you can get started with VueSPA CLI and start building your own SPAs today!
+The following options are supported by the VueSPA Builder Tool:
+
+| Option | Description |
+|---|---|
+| `-h, --help` | Display help information |
+| `-v, --version` | Display version information |
+| `-c, --config` | Path to the SPA configuration file |
+| `-r, --routes` | Path to the routes configuration file |
+| `-p, --prerenderer` | Path to the Prerenderer script |
+| `-o, --output` | Output directory for the bundled files |
+
+### Example Usage
+
+To create and bundle a Vue.js SPA, you can use the following command:
+
+```
+vue-spa-builder bundle -c spa.config.json -r routes.json -p prerenderer.js -o public
+```
+
+This command will create the Vue.js SPA and bundle the files in the `public` directory.
+
+### Contributing
+
+Contributions are welcome! Please read the [contributing guidelines](CONTRIBUTING.md) before submitting a pull request.

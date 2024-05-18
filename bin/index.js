@@ -232,9 +232,7 @@ function generateHTMLRoute (route) {
         <title>${title}</title>
       </head>
       <body>
-        <main>
-             
-        </main>
+        <main></main>
         <script type="importmap">
             {
             "imports": {

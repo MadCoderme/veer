@@ -61,6 +61,7 @@ yargs(hideBin(process.argv))
         readline.clearScreenDown(process.stdout)
         console.time('Time elapsed')
         console.log(chalk.blue('🔎 Looking for necessary files'))
+        
         // check for config file
         if (!fs.existsSync(process.cwd() + '/spa.config.json')) {
             console.error(chalk.red("Could not find config file"))

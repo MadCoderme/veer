@@ -33,7 +33,6 @@ const postcssConfigList = [
         if (id.startsWith("@css")) {
           return path.resolve("./src/assets/styles/css", id.slice(5));
         }
-  
         // resolve node_modules, @import '~normalize.css/normalize.css'
         // similar to how css-loader's handling of node_modules
         if (id.startsWith("~")) {

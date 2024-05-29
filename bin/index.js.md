@@ -1,190 +1,177 @@
-## VueSPA Bundler Documentation
+## VueSPA Bundle CLI Documentation
 
 **Table of Contents**
 
-1.  **Overview** 
-    *   1.1 Purpose
-    *   1.2 Usage
-2.  **Code Structure**
-    *   2.1 Dependencies
-    *   2.2 Configuration File (spa.config.json)
-    *   2.3 Script Execution
-    *   2.4 Core Functions
-        *   2.4.1 walk()
-        *   2.4.2 build()
-        *   2.4.3 generateOutputs()
-        *   2.4.4 generateHTMLRoute()
-3.  **Bundling Process**
-    *   3.1 Routes Creation
-    *   3.2 JavaScript Bundle Creation
-    *   3.3 Prerenderer Preparation
-    *   3.4 VueSPA Files Setup
+| Section | Description |
+|---|---|
+| [Introduction](#introduction) | Overview of the CLI tool and its purpose |
+| [Installation](#installation) | Instructions on installing the CLI tool |
+| [Usage](#usage) | Commands and their usage |
+| [Configuration](#configuration) | Configuring the CLI tool |
+| [Code Structure](#code-structure) | Breakdown of the code and its functions |
+| [Contributing](#contributing) | Guidelines for contributing to the project |
 
+### Introduction 
 
-### 1. Overview
+This CLI tool is designed to bundle a Vue.js Single Page Application (SPA) into a deployable format. It leverages Rollup for bundling and includes features like route generation, prerendering, and VueSPA setup.
 
-#### 1.1 Purpose
+### Installation
 
-This script is a command-line tool designed to bundle a Vue.js Single Page Application (SPA) project. It automates the process of generating HTML routes, creating JavaScript bundles for components, preparing a prerenderer script, and setting up necessary VueSPA files.
+1. **Prerequisites:**
+    * Node.js and npm (or yarn)
+    * A Vue.js project with a `src` directory containing your Vue components.
+2. **Install globally:**
+    ```bash
+    npm install -g <package-name> 
+    ```
 
-#### 1.2 Usage
+### Usage
 
-To use the bundler, follow these steps:
+**Bundle Command:** 
+  ```bash
+  vuespa-bundle bundle
+  ```
+  This command bundles your VueSPA project.
 
-1.  **Install Node.js and npm:** Ensure you have Node.js and npm installed on your system. 
-2.  **Create a `spa.config.json` file:** This file defines the project configuration, including the location of routes and prerenderer script. 
-3.  **Run the bundler:** Open a terminal in your project directory and run the command `node ./bin/index.js bundle`.
+### Configuration
 
-### 2. Code Structure
-
-#### 2.1 Dependencies
-
-The script relies on the following external libraries:
-
-| Library | Description |
-| :------- | :---------- |
-| yargs |  Command-line argument parsing |
-| chalk |  Colored terminal output |
-| readline |  Terminal input/output control |
-| fs |  File system operations |
-| path |  Path manipulation |
-| rollup |  Module bundler |
-| vue |  Rollup plugin for Vue.js components |
-| typescript |  Rollup plugin for TypeScript compilation |
-| uglify |  Rollup plugin for minification |
-| auto |  Rollup plugin for automatic dependency installation |
-| resolve |  Rollup plugin for resolving node modules |
-| replace |  Rollup plugin for string replacement |
-| url |  Rollup plugin for inlining assets |
-| PostCSS |  Rollup plugin for PostCSS processing |
-| postcssImport |  PostCSS plugin for importing CSS files |
-| postcssUrl |  PostCSS plugin for handling URLs |
-| simplevars |  PostCSS plugin for using variables |
-| nested |  PostCSS plugin for nested CSS selectors |
-| alias |  Rollup plugin for aliasing module paths |
-| commonjs |  Rollup plugin for handling CommonJS modules |
-| autoprefixer |  PostCSS plugin for adding vendor prefixes |
-| json |  Rollup plugin for parsing JSON files |
-
-#### 2.2 Configuration File (spa.config.json)
-
-The configuration file `spa.config.json`  should be placed at the root of your project. It defines the following parameters:
-
-| Parameter | Description |
-| :-------- | :---------- |
-| routes |  Path to the JSON file containing route definitions. |
-| prerenderer |  Path to the prerenderer script. |
-
-**Example `spa.config.json`:**
-
+The CLI tool reads a configuration file called `spa.config.json` from the root of your project directory. Here's an example structure:
 ```json
 {
-  "routes": "routes.json",
-  "prerenderer": "src/prerenderer.js"
+  "routes": "routes.json", // Path to the routes configuration file
+  "prerenderer": "prerender.js" // Path to the prerenderer script
 }
 ```
 
-#### 2.3 Script Execution
-
-The script runs as a command-line tool. It takes a single command `bundle` which triggers the bundling process.
-
-#### 2.4 Core Functions
-
-##### 2.4.1 `walk()`
-
-This function recursively traverses a directory and returns an array of all files within it.
-
-```javascript
-function walk(dir) {
-    return fs.readdirSync(dir, { withFileTypes: true }).flatMap((file) => file.isDirectory() ? walk(join(dir, file.name)) : join(dir, file.name))
-}
+**routes.json:**
+```json
+[
+  {
+    "path": "/",
+    "component": "src/views/HomePage.vue",
+    "meta": [
+      {
+        "name": "title",
+        "content": "Home Page" 
+      }
+    ]
+  },
+  {
+    "path": "/about",
+    "component": "src/views/AboutPage.vue",
+    "meta": [
+      {
+        "name": "title",
+        "content": "About Us" 
+      }
+    ]
+  }
+]
 ```
 
-##### 2.4.2 `build()`
+**Important Notes:** 
 
-This function takes an input configuration object and an output configuration object and uses rollup to bundle the specified input file. 
+* The `meta` array in the `routes.json` file can contain custom data for each route. 
+* The `title` meta field is used to generate the HTML title tag for each route.
+* Your Vue components must be located in the `src/views` directory.
 
-```javascript
-async function build(inputOption, outputOption) {
-    let bundle
-    let buildFailed = false
-    try {
-        bundle = await rollup(inputOption)
-        await generateOutputs(bundle, outputOption)
-    } catch (error) {
-        buildFailed = true
-        console.error(chalk.red(error), 'in', inputOption.input)
-    }
-    if (bundle) {
-        await bundle.close()
-    }
-}
-```
+### Code Structure
 
-##### 2.4.3 `generateOutputs()`
+**Key Components:**
 
-This function writes the bundled output to the specified destination using the rollup `bundle.write()` method.
+1. **`index.js`** 
+    * Entry point for the CLI tool.
+    * Uses `yargs` for command parsing and arguments.
+    * Defines the `bundle` command for bundling the VueSPA.
+    * Executes the bundling process asynchronously.
+    * Includes functions for:
+        * **`walk()`:** Recursively walks a directory tree and returns a list of all files.
+        * **`build()`:** Bundles a single Vue component using Rollup.
+        * **`generateOutputs()`:** Generates the output files for the bundle.
+        * **`generateHTMLRoute()`:** Generates HTML for a route using the provided route data.
 
-```javascript
-async function generateOutputs(bundle, outputOption) {
-    const { output } = await bundle.write(outputOption)
-}
-```
+2. **`spa.config.json`**
+    * Configuration file for the VueSPA bundle CLI.
+    * Specifies the locations of the routes file and the prerenderer script.
 
-##### 2.4.4 `generateHTMLRoute()`
+3. **`routes.json`**
+    * Contains an array of route objects defining the paths, components, and meta data for each route in the application.
 
-This function takes a route object and generates the corresponding HTML file content. It includes basic HTML structure, meta tags, and script imports.
+4. **`prerender.js`**
+    * A custom prerendering script that pre-renders the SPA's content on the server.
 
-```javascript
-function generateHTMLRoute (route) {
-    const title = route.meta.find(el => el.name === "title")?.content ?? ''
-    return `<!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>${title}</title>
-      </head>
-      <body>
-        <main></main>
-        <script type="importmap">
-            {
-            "imports": {
-                "vue": "/vue.esm-browser.js"
-            }
-            }
-        </script>
-        <script src="./prerenderer.js" type="module"></script>
-        <script src="./setup.js" type="module"></script>
-      </body>
-    </html>
-    `
-}
-```
+5. **`src/views`**
+    * Directory containing Vue components, which are bundled into individual JavaScript files.
 
-### 3. Bundling Process
+6. **`public`**
+    * Directory where the bundled application is outputted.
 
-#### 3.1 Routes Creation
+**Rollup Plugins:**
+* `vue`: Bundles Vue.js components.
+* `typescript`: Transpiles TypeScript code.
+* `uglify`: Minifies JavaScript code.
+* `auto`: Automatically installs required modules.
+* `resolve`: Resolves module dependencies.
+* `replace`: Replaces placeholder values in the code.
+* `url`: Handles URL imports for images and other assets.
+* `PostCSS`: Processes CSS files with PostCSS plugins.
+* `postcssImport`: Resolves CSS imports.
+* `postcssUrl`: Handles URLs in CSS files.
+* `simplevars`: Processes CSS variables.
+* `nested`: Allows for nested CSS selectors.
+* `alias`: Creates aliases for module paths.
+* `commonjs`: Handles CommonJS modules.
+* `autoprefixer`: Adds vendor prefixes to CSS.
+* `json`: Handles JSON files.
 
-The script first reads the route definitions from the specified `routes.json` file. It then generates an HTML file for each route, saving them to the `public` directory.
+**Code Explanation:**
 
-#### 3.2 JavaScript Bundle Creation
+* **Bundling Process:**
+    * The `bundle` command reads the `spa.config.json` file for configuration.
+    * It reads the routes from the specified routes file (`routes.json`).
+    * For each route, it generates an HTML file with the appropriate title, script imports, and a placeholder for the Vue component.
+    * It then uses Rollup to bundle each Vue component into a separate JavaScript file.
+    * The bundled files are outputted into the `public` directory.
+    * The prerenderer script is also bundled and outputted as `prerenderer.js`.
+    * Finally, the necessary VueSPA setup files (including Vue.js, the routes configuration, and a setup script) are copied into the `public` directory.
 
-The script then iterates through the components found in the `src/views` directory. It uses Rollup to create a JavaScript bundle for each component, outputting them to the `public/bundles` directory.  Rollup plugins are used for:
+* **Prerendering:**
+    * The bundled prerenderer script is responsible for pre-rendering the content of the SPA on the server.
+    * This improves SEO and initial page load performance.
 
-*   **Vue.js component processing:**  The `vue` plugin handles Vue.js component compilation.
-*   **TypeScript compilation:**  The `typescript` plugin compiles TypeScript code.
-*   **Dependency resolution:** The `resolve` plugin resolves node modules.
-*   **CommonJS module handling:** The `commonjs` plugin handles CommonJS modules.
-*   **Minification:**  The `uglify` plugin minifies the bundled code.
-*   **Asset inlining:**  The `url` plugin inlines assets like images.
-*   **PostCSS processing:**  The `PostCSS` plugin processes CSS with plugins like `postcssImport`, `postcssUrl`, `simplevars`, `nested`, and `autoprefixer`.
+* **VueSPA Setup:**
+    * The `setup.js` script is used to bootstrap the VueSPA on the client side.
+    * It loads the necessary Vue components and initializes the application.
 
-#### 3.3 Prerenderer Preparation
+* **HTML Generation:**
+    * The `generateHTMLRoute()` function generates the HTML for each route, including the title, script imports, and a placeholder for the Vue component.
 
-The prerenderer script is bundled and saved to `public/prerenderer.js`. This script is responsible for handling initial rendering and server-side rendering.
+* **PostCSS:**
+    * PostCSS is used to process CSS files with plugins like `postcssImport`, `postcssUrl`, `simplevars`, and `autoprefixer`.
 
-#### 3.4 VueSPA Files Setup
+**Key Functionality:**
 
-Finally, the script copies two files, `setup.js` and `vue.esm-browser.js` to the `public` directory. It also creates `routes.config.js` file containing the route definitions for use in the client-side application. These files are essential for VueSPA's functionality. 
+* **Route Generation:**
+    * Creates HTML files for each route in the application.
+    * Sets the correct title and meta tags for each route.
+
+* **Component Bundling:**
+    * Bundles each Vue component into a separate JavaScript file using Rollup.
+
+* **Prerendering:**
+    * Includes a prerendering script to improve SEO and initial page load performance.
+
+* **VueSPA Setup:**
+    * Provides a setup script to initialize the VueSPA on the client side.
+
+* **Configuration:**
+    * Uses a configuration file to specify the routes and prerenderer script.
+
+* **Error Handling:**
+    * Includes error handling to catch potential issues during the bundling process.
+
+**Future Improvements:**
+
+* Add support for more advanced routing configurations (e.g., nested routes).
+* Provide options for customizing the output directory and bundling settings.
+* Improve the CLI user experience with more informative output and progress indicators.
